@@ -35,7 +35,7 @@
 
 # Database
 
-Using default sqlite database, test products already added
+Using default sqlite database for developement and postgresql in deployment, test products already added
 
 # Admin
 
@@ -45,7 +45,7 @@ Password: 0
 
 # Payment
 
-Supports stripe session and payment intent, two hard coded buttons to execute each method of payment 
+Supports stripe session and payment intent, two hard coded buttons to execute each method of payment in cart checkout
 
 # Live url
 
