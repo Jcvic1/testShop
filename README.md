@@ -44,8 +44,9 @@ Email: shopadmin@gmail.com
 Password: 0
 
 # Payment
-https://testshoppayment.onrender.com/
 
 Supports stripe session and payment intent, two hard coded buttons to execute each method of payment 
 
 # Live url
+
+https://testshoppayment.onrender.com/
