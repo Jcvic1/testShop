@@ -13,7 +13,7 @@
   STRIPE_PUBLIC_KEY_USD={}
   STRIPE_SECRET_KEY_USD={}
 
-  Second currency
+  Secondary currency
 
   STRIPE_PUBLIC_KEY_POUND={}
   STRIPE_SECRET_KEY_POUND={}
