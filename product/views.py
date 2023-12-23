@@ -89,6 +89,7 @@ def order_item_remove(request, item_id):
 
 def buy(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
+    order_item = OrderItem.objects.get(item=item)
     if item.currency == "usd":
         stripe.api_key = config.STRIPE_SECRET_KEY_USD
     else:
@@ -124,7 +125,7 @@ def buy(request, item_id):
                             "images": [item.url],
                         },
                     },
-                    "quantity": 1,
+                    "quantity": order_item.quantity,
                     "tax_rates": tax,
                 },
             ],
