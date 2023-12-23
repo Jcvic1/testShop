@@ -1,4 +1,4 @@
-# Store payment Django 
+# Store Payment Django 
 
 1. clone repository or download zip.
 
