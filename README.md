@@ -1,4 +1,4 @@
-# Store payment Django 
+# Store Payment Django 
 
 1. clone repository or download zip.
 
@@ -13,7 +13,7 @@
   STRIPE_PUBLIC_KEY_USD={}
   STRIPE_SECRET_KEY_USD={}
 
-  Second currency
+  Secondary currency
 
   STRIPE_PUBLIC_KEY_POUND={}
   STRIPE_SECRET_KEY_POUND={}
@@ -35,7 +35,7 @@
 
 # Database
 
-Using default sqlite database, test products already added
+Using default sqlite database for developement and postgresql in deployment, test products already added
 
 # Admin
 
@@ -45,6 +45,8 @@ Password: 0
 
 # Payment
 
-Supports stripe session and payment intent, two hard coded buttons to execute each method of payment 
+Supports stripe session and payment intent, two hard coded buttons to execute each method of payment in cart checkout
 
 # Live url
+
+https://testshoppayment.onrender.com/
