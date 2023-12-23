@@ -1,0 +1,45 @@
+{% if empty %} {% else %}
+<div class="d-flex justify-content-between aligin-items-center ms-3">
+  <button
+    hx-post="{% url 'order_item_add' order_item.item.id %}"
+    hx-target="#update-{{order_item.item.id}}"
+    hx-swap="innerHTML"
+    class="btn btn-outline-warning btn-sm mt-3 rounded-end rounded-5 fs-6 py-auto"
+    style="min-width: 35px"
+  >
+    +
+  </button>
+
+  <span class="mx-4 mt-4"> {{order_item.quantity}}</span>
+  <button
+    hx-post="{% url 'order_item_remove' order_item.item.id %}"
+    hx-target="#update-{{order_item.item.id}}"
+    hx-swap="innerHTML"
+    class="btn btn-outline-warning btn-sm mt-3 rounded-start rounded-5 fs-6 py-auto"
+    style="min-width: 35px"
+  >
+    -
+  </button>
+</div>
+{% endif %}
+
+<li
+  hx-swap-oob="true"
+  id="cart_count"
+  class="nav-item d-flex justify-content-end mt-3 me-3"
+>
+  <a class="nav-link" href="{% url 'cart' %}">
+    <button
+      type="button"
+      class="btn btn-warning position-relative rounded-pill py-1"
+    >
+      Cart <i class="bi bi-cart3 mx-2"></i>
+      <span
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+      >
+        <span id="cart_count">{{order.items.count}}</span>
+        <span class="visually-hidden">cart items</span>
+      </span>
+    </button>
+  </a>
+</li>

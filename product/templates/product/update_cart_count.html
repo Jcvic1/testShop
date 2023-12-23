@@ -1,0 +1,41 @@
+<a class="nav-link" href="{% url 'cart' %}">
+  <button
+    type="button"
+    class="btn btn-warning position-relative rounded-pill py-1"
+  >
+    Cart <i class="bi bi-cart3 mx-2"></i>
+    <span
+      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    >
+      <span id="cart_count">{{order.items.count}}</span>
+      <span class="visually-hidden">cart items</span>
+    </span>
+  </button>
+</a>
+
+<div hx-swap-oob="true" id="update-{{item.id}}">
+  {% for order in order.items.all %} {% if order.item.id == item.id %}
+  <div class="d-flex justify-content-between aligin-items-center ms-3">
+    <button
+      hx-post="{% url 'order_item_add' item.id %}"
+      hx-target="#update-{{item.id}}"
+      hx-swap="innerHTML"
+      class="btn btn-outline-warning btn-sm mt-3 rounded-end rounded-5 fs-6 py-auto"
+      style="min-width: 35px"
+    >
+      +
+    </button>
+
+    <span class="mx-4 mt-4"> {{order.quantity}}</span>
+    <button
+      hx-post="{% url 'order_item_remove' item.id %}"
+      hx-target="#update-{{item.id}}"
+      hx-swap="innerHTML"
+      class="btn btn-outline-warning btn-sm mt-3 rounded-start rounded-5 fs-6 py-auto"
+      style="min-width: 35px"
+    >
+      -
+    </button>
+  </div>
+  {% endif %} {% endfor %}
+</div>

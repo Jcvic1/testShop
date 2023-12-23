@@ -1,0 +1,128 @@
+{% extends 'product/base.html' %} {% load static %} {% block title %}Product{%endblock %} {% block content %}
+<span
+  hx-get="{% url 'cart_count' %}"
+  hx-target="#cart_count"
+  hx-swap="innerHTML"
+  hx-trigger="load"
+></span>
+
+<section style="background-color: #000000; min-height: 100vh">
+  <div class="container py-5">
+    <div class="w-100 mx-auto mb-5 d-flex justify-content-center">
+      <div>
+        <h1>{{item.name}}</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-12 col-md-6">
+        <div class="card shadow-0 border rounded-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                <div class="bg-image hover-zoom ripple rounded ripple-surbice">
+                  <img src="{{item.url}}" class="w-100" />
+                  <a href="#!">
+                    <div class="hover-overlay">
+                      <div
+                        class="mask"
+                        style="background-color: rgba(253, 253, 253, 0.15)"
+                      ></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-xl-6">
+                <h5>{{item.name}}</h5>
+                <div class="d-flex flex-row">
+                  <div class="text-warning mb-1 me-2">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                  <span>310</span>
+                </div>
+                <div class="mt-1 mb-0 text-muted small">
+                  <span>100% cotton</span>
+                  <span class="text-warning"> • </span>
+                  <span>Light weight</span>
+                  <span class="text-warning"> • </span>
+                  <span>Best finish<br /></span>
+                </div>
+                <div class="mb-2 text-muted small">
+                  <span>Unique design</span>
+                  <span class="text-warning"> • </span>
+                  <span>Casual<br /></span>
+                </div>
+                <p class="mb-4 mb-md-0">{{item.description}}</p>
+              </div>
+              <div class="col-md-6 col-lg-3 col-xl-3">
+                <div class="d-flex flex-row align-items-center mb-1">
+                  {% if item.discount != 0 %}
+                  <h4 class="mb-1 me-1">${{item.get_discount}}</h4>
+                  <span class="text-warning"><s>${{item.price}}</s></span>
+                  {% else %}
+                  <h4 class="mb-1 me-1">${{item.price}}</h4>
+                  {% endif %}
+                </div>
+                <h6 class="text-success">Free shipping</h6>
+                <div class="d-flex flex-column mt-4 w-100">
+                  <form class="w-100" action="{% url 'buy' item.id %}" method="GET">
+                    <button
+                      class="btn btn-warning btn-sm rounded-pill w-100 fs-6"
+                      type="submit"
+                    >
+                      Buy Now
+                    </button>
+                  </form>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <button
+                      hx-post="{% url 'order_item' item.id %}"
+                      hx-target="#cart_count"
+                      hx-swap="innerHTML"
+                      class="btn btn-outline-warning btn-sm rounded-pill mt-3 w-100 fs-6"
+                    >
+                      Add to cart
+                    </button>
+                    <div id="update-{{item.id}}">
+                      {%for order in order.items.all%} {%if order.item.id == item.id%}
+                      <div
+                        class="d-flex justify-content-between aligin-items-center ms-3"
+                      >
+                        <button
+                          hx-post="{% url 'order_item_add' item.id %}"
+                          hx-target="#update-{{item.id}}"
+                          hx-swap="innerHTML"
+                          class="btn btn-outline-warning btn-sm mt-3 rounded-end rounded-5 fs-6 py-auto"
+                          style="min-width: 35px"
+                        >
+                          +
+                        </button>
+
+                        <span class="mx-4 mt-4"> {{order.quantity}}</span>
+                        <button
+                          hx-post="{% url 'order_item_remove' item.id %}"
+                          hx-target="#update-{{item.id}}"
+                          hx-swap="innerHTML"
+                          class="btn btn-outline-warning btn-sm mt-3 rounded-start rounded-5 fs-6 py-auto"
+                          style="min-width: 35px"
+                        >
+                          -
+                        </button>
+                      </div>
+                      {%endif%}{%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
